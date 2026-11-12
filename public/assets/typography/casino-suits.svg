@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="470" height="53" viewBox="0 0 470 53">
+<defs>
+ <linearGradient id="gold" x1="0" y1="0" x2=".2" y2="1" gradientUnits="objectBoundingBox">
+   <stop stop-color="#fff9c7"/><stop offset=".28" stop-color="#e3b55c"/><stop offset=".6" stop-color="#fff0a1"/><stop offset="1" stop-color="#be671b"/>
+ </linearGradient>
+ <linearGradient id="black" x2="0" y2="1"><stop stop-color="#4c2b13"/><stop offset=".6" stop-color="#160805"/><stop offset="1" stop-color="#060201"/></linearGradient>
+ <linearGradient id="red" x2="0" y2="1"><stop stop-color="#ff5424"/><stop offset=".57" stop-color="#d11c0f"/><stop offset="1" stop-color="#610204"/></linearGradient>
+ <linearGradient id="rail">
+   <stop stop-color="#df3600" stop-opacity="0"/><stop offset=".39" stop-color="#d87520"/><stop offset=".62" stop-color="#fff0ad"/><stop offset="1" stop-color="#d9791c" stop-opacity=".5"/>
+ </linearGradient>
+ <filter id="light" x="-.5" y="-.5" width="2" height="2"><feDropShadow dx="0" dy="0" stdDeviation="2.4" flood-color="#c1390c" flood-opacity=".8"/></filter>
+</defs>
+<g filter="url(#light)" stroke-linejoin="round">
+ <g fill="none" stroke="url(#rail)" stroke-width="2">
+   <path d="M2 20H109M2 36H109"/><path d="M2 20H109M2 36H109" transform="translate(470 0) scale(-1 1)"/>
+ </g>
+ <g stroke="url(#gold)" stroke-width="2.3">
+   <path fill="url(#black)" d="M153 5C163 5 168 13 162 21C169 17 175 23 175 30C175 38 167 43 159 37L163 46H146L151 37C143 43 134 38 134 30C134 23 139 17 146 21C141 13 144 5 153 5Z"/>
+   <path fill="url(#black)" d="M210 5C218 13 230 21 230 31C230 39 220 43 213 36L217 46H202L207 36C200 43 189 39 189 31C189 21 201 13 210 5Z"/>
+   <path fill="url(#red)" d="M265 46L247 27C237 15 251 1 260 8C262 9 264 11 265 14C267 11 269 8 273 7C285 1 293 17 284 27Z"/>
+   <path fill="url(#red)" d="M320 5L340 26L320 47L300 26Z"/>
+ </g>
+ <g fill="none" stroke="#fff8cc" stroke-linecap="round" stroke-width="1.15" opacity=".75">
+  <path d="M145 12Q149 6 155 7M139 25Q141 21 147 22M194 27Q197 19 209 8M248 18Q247 7 258 10M305 24L320 8"/>
+ </g>
+</g></svg>

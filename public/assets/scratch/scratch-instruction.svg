@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 205" role="img" aria-label="Toca aquí">
+  <g fill="#211b15">
+    <circle cx="128" cy="55" r="50" fill="none" stroke="#211b15" stroke-width="4.4"/>
+    <path d="M108 26h40v10h-30zm0 23h40v11h-40zm10 23h30v10h-40z"/>
+    <text x="128" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="45" font-weight="800" letter-spacing=".4">TOCA</text>
+    <text x="128" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="45" font-weight="800" letter-spacing=".4">AQUÍ</text>
+  </g>
+</svg>

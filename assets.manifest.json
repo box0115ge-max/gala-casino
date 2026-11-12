@@ -1,0 +1,42 @@
+{
+  "base": "public/assets",
+  "designCanvas": { "width": 1086, "height": 1448 },
+  "resources": [
+    { "path": "background/casino-background.webp", "origin": "Fondo vino reconstruido con textura, luces ambientales y muestras del póster." },
+    { "path": "background/marquee-border.png", "webp": "background/marquee-border.webp", "origin": "Marco y bombillas separados del póster con transparencia." },
+    { "path": "background/ambient-glow.png", "webp": "background/ambient-glow.webp", "origin": "Resplandores rojos separados del póster." },
+    { "path": "branding/grupo-emmi-logo.webp", "origin": "Recorte transparente del logotipo dorado que aparece en el póster." },
+    { "path": "branding/gold-crown.png", "origin": "Corona separada del póster." },
+    { "path": "branding/partner-logos.svg", "origin": "Archivo LOGOS ABAJO.svg aportado por el usuario, conservado intacto." },
+    {
+      "origin": "Vectores originales de las nueve marcas del pie, exportados individualmente desde LOGOS ABAJO.svg.",
+      "paths": [
+        "branding/limpesa-solutions.svg", "branding/servyclean.svg", "branding/el-urbano-news.svg",
+        "branding/demente.svg", "branding/the-printt.svg", "branding/bilans-erp.svg",
+        "branding/urban-city-media.svg", "branding/box-marketing.svg", "branding/cim-co.svg"
+      ]
+    },
+    { "path": "typography/gala-title.png", "webp": "typography/gala-title.webp", "origin": "Rótulo Gala separado del póster." },
+    { "path": "typography/casino-marquee.png", "webp": "typography/casino-marquee.webp", "origin": "Marquesina CASINO separada del póster." },
+    { "path": "typography/gala-ribbon.png", "webp": "typography/gala-ribbon.webp", "origin": "Cinta NOCHE DE GALA separada del póster." },
+    { "path": "typography/casino-suits.svg", "origin": "Palos vectoriales trazados con la geometría y acabados del póster." },
+    { "path": "typography/scratch-heading.png", "webp": "typography/scratch-heading.webp", "origin": "Cartel RASPA Y DESCUBRE TU INVITACIÓN separado del póster." },
+    { "path": "casino/poker-cards.png", "webp": "casino/poker-cards.webp", "origin": "Cartas visibles separadas del póster." },
+    { "path": "casino/casino-chips.png", "webp": "casino/casino-chips.webp", "origin": "Fichas visibles separadas del póster." },
+    { "path": "casino/casino-dice.png", "webp": "casino/casino-dice.webp", "origin": "Dados visibles separados del póster." },
+    { "path": "casino/roulette-wheel.png", "webp": "casino/roulette-wheel.webp", "origin": "Ruleta recortada en el borde derecho según el póster." },
+    { "path": "scratch/scratch-gold-frame.png", "webp": "scratch/scratch-gold-frame.webp", "origin": "Marco dorado extraído del póster, rectificado y con centro transparente." },
+    { "path": "scratch/scratch-silver-texture.png", "webp": "scratch/scratch-silver-texture.webp", "origin": "Lámina opaca generada con grano muestreado del póster." },
+    { "path": "scratch/scratch-instruction.svg", "origin": "Arte editable de referencia con símbolo y texto TOCA AQUÍ." },
+    { "path": "scratch/scratch-mark.svg", "origin": "Símbolo trazado del raspadito. El Canvas añade el texto desde la configuración." },
+    { "path": "scratch/scratch-reveal-background.png", "webp": "scratch/scratch-reveal-background.webp", "origin": "Fondo original oscuro con textura y líneas doradas para la revelación." },
+    { "path": "effects/gold-glint.svg", "origin": "Destello vectorial que recorre el marco al revelar la tarjeta." }
+  ],
+  "effects": [
+    { "source": "src/components/MarqueeLights.tsx", "description": "Destellos y bombillas animadas sobre el cartel." },
+    { "source": "src/styles/scratch.css", "description": "Iluminación dorada de la revelación y modo de movimiento reducido." }
+  ],
+  "pending": [
+    { "path": "branding/grupo-emmi-logo.svg", "requiredSource": "Logotipo oficial vectorial de Grupo Emmi.", "inUse": "branding/grupo-emmi-logo.webp" }
+  ]
+}
