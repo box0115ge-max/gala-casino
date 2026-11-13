@@ -183,12 +183,3 @@
     box-shadow: 0 0 5rem #080102bd;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .poster__roulette,
-  .poster__ring,
-  .poster__ring-glow,
-  .poster__prop,
-  .poster__ambient,
-  .poster__night-glow { animation: none; }
-}

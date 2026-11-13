@@ -9,11 +9,11 @@ interface PosterArtProps {
   alt?: string;
   fallback?: string;
   priority?: boolean;
-  reducedMotionPath?: string;
+  fallbackPath?: string;
 }
 
 export default function PosterArt({
-  path, bounds, className = '', alt = '', fallback, priority, reducedMotionPath,
+  path, bounds, className = '', alt = '', fallback, priority, fallbackPath,
 }: PosterArtProps) {
   const [failed, setFailed] = useState(false);
   const [still, setStill] = useState(false);
@@ -26,18 +26,14 @@ export default function PosterArt({
 
   return (
     <picture className={classes} style={style}>
-      {reducedMotionPath && !still && (
-        <source srcSet={asset(reducedMotionPath)} media="(prefers-reduced-motion: reduce)" />
-      )}
       <img
-        src={asset(still && reducedMotionPath ? reducedMotionPath : path)}
+        src={asset(still && fallbackPath ? fallbackPath : path)}
         alt={alt}
         decoding="async"
         fetchPriority={priority ? 'high' : undefined}
         draggable={false}
-        onError={(event) => {
-          const current = event.currentTarget.currentSrc;
-          if (reducedMotionPath && !still && !current.endsWith(`/${reducedMotionPath}`)) {
+        onError={() => {
+          if (fallbackPath && !still) {
             setStill(true);
           } else {
             setFailed(true);

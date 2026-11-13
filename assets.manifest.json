@@ -91,7 +91,7 @@
     },
     {
       "path": "redesign/title-still.webp",
-      "origin": "Fotograma estático del WebP original para movimiento reducido."
+      "origin": "Fotograma de respaldo si el WebP animado no se puede cargar."
     },
     {
       "path": "scratch/scratch-mark.svg",
