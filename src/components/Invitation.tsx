@@ -1,5 +1,6 @@
 import { artwork, casinoProps, place } from '../config/artwork';
 import { eventConfig } from '../config/event';
+import InvitationMusic from './InvitationMusic';
 import PosterArt from './PosterArt';
 import ScratchCard from './ScratchCard';
 
@@ -30,6 +31,7 @@ export default function Invitation() {
         <PosterArt className="poster__foreground" path="redesign/LOGO_TWN_WEB.webp" reducedMotionPath="redesign/title-still.webp" bounds={artwork.title} fallback={eventConfig.title} priority />
         <PosterArt className="poster__foreground poster__night-glow" path="redesign/night-flare.webp" bounds={artwork.nightGlow} />
         <PosterArt path="redesign/ribbon.webp" bounds={artwork.ribbon} alt="Noche de gala" fallback="Noche de gala" />
+        <InvitationMusic />
       </article>
     </main>
   );

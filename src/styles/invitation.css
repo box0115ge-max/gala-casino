@@ -47,6 +47,56 @@
 
 .poster__foreground { z-index: 1; }
 
+.invitation-music {
+  position: absolute;
+  inset-block-start: .625rem;
+  inset-inline-end: .625rem;
+  display: grid;
+  justify-items: end;
+}
+
+.invitation-music__button {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 44px;
+  padding: .5rem .75rem;
+  border: 1px solid #d39955a6;
+  border-radius: 999px;
+  color: #fff0c5;
+  background: #200b09e8;
+  font: 600 .8125rem / 1 'Inter', system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.invitation-music__button:focus-visible {
+  outline: 2px solid #ffdb93;
+  outline-offset: 2px;
+}
+
+.invitation-music__icon {
+  width: .65rem;
+  height: .65rem;
+  background: currentColor;
+  clip-path: polygon(16% 0, 100% 50%, 16% 100%);
+}
+
+.invitation-music__button[aria-pressed='true'] .invitation-music__icon {
+  background: linear-gradient(to right, currentColor 0 35%, transparent 35% 65%, currentColor 65%);
+  clip-path: none;
+}
+
+.invitation-music__status {
+  max-width: 10rem;
+  margin: .35rem 0 0;
+  padding: .45rem;
+  border-radius: .25rem;
+  background: #200b09;
+  color: #fff0c5;
+  text-align: end;
+  font-size: .75rem;
+}
+
 .poster__ambient,
 .poster__crown-light,
 .poster__scratch-glow,

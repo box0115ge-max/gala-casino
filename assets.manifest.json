@@ -96,6 +96,10 @@
     {
       "path": "scratch/scratch-mark.svg",
       "origin": "Símbolo de respaldo y favicon."
+    },
+    {
+      "path": "audio/james-brown-its-a-mans-world.mp3",
+      "origin": "It's a Man's Man's Man's World, de James Brown. MP3 aportado por el usuario."
     }
   ]
 }
