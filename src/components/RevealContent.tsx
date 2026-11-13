@@ -4,22 +4,16 @@ import { eventConfig } from '../config/event';
 interface RevealContentProps {
   id: string;
   exposed: boolean;
-  headingRef: Ref<HTMLHeadingElement>;
+  sectionRef: Ref<HTMLElement>;
 }
 
-export function RevealContent({ id, exposed, headingRef }: RevealContentProps) {
-  const headingId = `${id}-title`;
-
+export function RevealContent({ id, exposed, sectionRef }: RevealContentProps) {
   return (
-    <section className="scratch-reveal" id={id} aria-labelledby={headingId} aria-hidden={!exposed}>
-      <p className="scratch-reveal__brand">{eventConfig.brand}</p>
-      <h2 className="scratch-reveal__title" id={headingId} ref={headingRef} tabIndex={-1}>
-        {eventConfig.title}
-      </h2>
+    <section className="scratch-reveal" id={id} ref={sectionRef} tabIndex={-1} aria-label="Detalles de la invitación" aria-hidden={!exposed}>
       <dl className="scratch-reveal__details">
         <div>
           <dt className="scratch-visually-hidden">Fecha</dt>
-          <dd>{eventConfig.date}</dd>
+          <dd className="scratch-reveal__date">{eventConfig.date}</dd>
         </div>
         <div>
           <dt className="scratch-visually-hidden">Hora</dt>

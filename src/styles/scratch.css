@@ -7,15 +7,15 @@
 
 .scratch-card__surface {
   position: absolute;
-  inset: 5.78% 4.5%;
+  inset: 0;
   overflow: hidden;
-  border-radius: 7.7% / 10.2%;
+  border-radius: 50%;
   container-type: inline-size;
-  background: radial-gradient(ellipse at 50% 32%, #301b0b, #100707 78%);
+  background:
+    radial-gradient(circle at 50% 36%, #561314, #31080b 59%, #170507 91%);
+  box-shadow: inset 0 0 0 1px #d8a65088, inset 0 0 5cqw #120103b8;
 }
 
-.scratch-card__frame,
-.scratch-card__reveal-art,
 .scratch-card__canvas,
 .scratch-card__foil-fallback,
 .scratch-card__celebration {
@@ -25,33 +25,10 @@
   height: 100%;
 }
 
-.scratch-card__frame,
-.scratch-card__reveal-art,
 .scratch-card__celebration,
 .scratch-card__foil-fallback {
   pointer-events: none;
   user-select: none;
-}
-
-.scratch-card__frame {
-  z-index: 2;
-  display: block;
-}
-
-.scratch-card[data-frame='false']::after {
-  position: absolute;
-  z-index: 2;
-  inset: 0;
-  box-sizing: border-box;
-  border: max(3px, 1.4cqw) solid #e1a841;
-  border-radius: 10.7% / 13.8%;
-  box-shadow: inset 0 0 3px 1px #fff0a3, 0 2px 6px #170800ba;
-  content: '';
-  pointer-events: none;
-}
-
-.scratch-card__reveal-art {
-  object-fit: cover;
 }
 
 .scratch-reveal {
@@ -60,8 +37,8 @@
   display: grid;
   align-content: center;
   justify-items: center;
-  gap: 1.45cqw;
-  padding: 2.5% 5%;
+  gap: 3.5cqw;
+  padding: 0 10%;
   color: #fff1ca;
   text-align: center;
   font-family: 'Inter', Arial, sans-serif;
@@ -69,42 +46,28 @@
 }
 
 .scratch-reveal p,
-.scratch-reveal h2,
 .scratch-reveal dl,
 .scratch-reveal dd {
   margin: 0;
 }
 
-.scratch-reveal__brand {
-  color: #eac77a;
-  font-size: 5.4cqw;
-  font-weight: 700;
-  letter-spacing: 0.17em;
-}
-
-.scratch-reveal__title {
-  max-width: 100%;
-  color: #ffe4a0;
-  font-family: 'Cinzel', Georgia, serif;
-  font-size: 8.85cqw;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  line-height: 1.02;
-  text-shadow: 0 1px 5px #190600b3;
-  text-wrap: balance;
-  overflow-wrap: anywhere;
-}
-
-.scratch-reveal__title:focus {
+.scratch-reveal:focus {
   outline: none;
 }
 
 .scratch-reveal__details {
   display: grid;
-  gap: 0.55cqw;
-  font-size: 7.1cqw;
-  font-weight: 600;
+  gap: 1cqw;
+  font-size: 8.2cqw;
+  font-weight: 700;
   overflow-wrap: anywhere;
+}
+
+.scratch-reveal .scratch-reveal__date {
+  max-inline-size: 15.7ch;
+  margin-inline: auto;
+  color: #ffe0a1;
+  font-weight: 750;
 }
 
 .scratch-reveal__venue {
@@ -114,9 +77,10 @@
 }
 
 .scratch-reveal__message {
+  max-width: 16ch;
   color: #f2d4a1;
   font-family: Georgia, serif;
-  font-size: 6.5cqw;
+  font-size: 8.1cqw;
   font-style: italic;
   text-wrap: balance;
 }
@@ -124,30 +88,19 @@
 .scratch-card__foil-fallback {
   z-index: 1;
   display: grid;
-  grid-template-rows: 27% auto;
-  justify-items: center;
-  align-content: start;
-  gap: 8%;
-  padding: 11% 8% 0;
-  background: linear-gradient(138deg, #989596, #ebebeb 36%, #adabaa 56%, #d1cfcd 82%, #9b9898);
-  color: #211b19;
-  text-align: center;
-  font: 900 12.2cqw / 1 Arial, sans-serif;
+  place-items: center;
+  background: linear-gradient(138deg, #a4a5a2, #c6c9c2 40%, #b2b8b0 73%, #9eaaa7);
 }
 
 .scratch-card__foil-fallback img {
-  aspect-ratio: 1;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.scratch-card__foil-fallback span {
-  max-width: 8ch;
+  width: 46%;
+  opacity: 0.46;
 }
 
 .scratch-card__canvas {
   z-index: 2;
   display: block;
+  clip-path: circle(50%);
   touch-action: none;
   cursor: crosshair;
   -webkit-tap-highlight-color: transparent;
@@ -163,8 +116,8 @@
 .scratch-card__reveal-button {
   position: absolute;
   z-index: 3;
-  inset: auto 4% 5%;
-  width: 92%;
+  inset: auto 16% 20%;
+  width: 68%;
   padding: 0.45em 0.3em;
   border: 1px solid #f2c972;
   border-radius: 0.4em;
@@ -194,49 +147,29 @@
 
 .scratch-card__celebration {
   z-index: 3;
-  border-radius: 10.7% / 13.8%;
+  border-radius: 50%;
   opacity: 0;
-  box-shadow: 0 0 0.5rem #f7ac40a0, 0 0 1.1rem #ffad496b, inset 0 0 0.6rem #ffe19972;
-}
-
-.scratch-card__celebration::after {
-  position: absolute;
-  top: 2.8%;
-  left: 6%;
-  width: 23%;
-  height: 1.1%;
-  background: var(--scratch-glint) center / 100% 100% no-repeat,
-    radial-gradient(ellipse, #fff7c2, #ffd671a0 42%, transparent 73%);
-  opacity: 0;
-  content: '';
+  box-shadow: inset 0 0 0.8rem #ffda8580;
 }
 
 .scratch-card[data-stage='revealing'] .scratch-card__celebration {
   animation: scratch-border-glow 1100ms ease-in-out 180ms both;
 }
 
-.scratch-card[data-stage='revealing'] .scratch-card__celebration::after {
-  animation: scratch-frame-glint 520ms ease-in-out 760ms both;
-}
-
-.scratch-card[data-stage='revealing'] .scratch-reveal__title {
-  animation: scratch-rise 460ms ease-out 330ms both;
-}
-
 .scratch-card[data-stage='revealing'] .scratch-reveal__details > div {
-  animation: scratch-rise 390ms ease-out var(--scratch-detail-delay, 490ms) both;
+  animation: scratch-rise 390ms ease-out var(--scratch-detail-delay, 350ms) both;
 }
 
 .scratch-card[data-stage='revealing'] .scratch-reveal__details > div:nth-child(2) {
-  --scratch-detail-delay: 550ms;
+  --scratch-detail-delay: 415ms;
 }
 
 .scratch-card[data-stage='revealing'] .scratch-reveal__details > div:nth-child(3) {
-  --scratch-detail-delay: 610ms;
+  --scratch-detail-delay: 480ms;
 }
 
 .scratch-card[data-stage='revealing'] .scratch-reveal__message {
-  animation: scratch-rise 390ms ease-out 650ms both;
+  animation: scratch-rise 390ms ease-out 545ms both;
 }
 
 @keyframes scratch-rise {
@@ -250,19 +183,10 @@
   75% { opacity: 0.56; }
 }
 
-@keyframes scratch-frame-glint {
-  0% { opacity: 0; transform: translateX(0); }
-  25%, 70% { opacity: 1; }
-  100% { opacity: 0; transform: translateX(280%); }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .scratch-card[data-stage='revealing'] * {
     animation: none;
     transition: none;
   }
 
-  .scratch-card[data-stage='revealing'] .scratch-card__celebration::after {
-    animation: none;
-  }
 }

@@ -1,34 +1,35 @@
-import { artwork, place } from '../config/artwork';
+import { artwork, casinoProps, place } from '../config/artwork';
 import { eventConfig } from '../config/event';
-import CasinoBackground from './CasinoBackground';
-import CasinoDecorations from './CasinoDecorations';
-import MarqueeLights from './MarqueeLights';
 import PosterArt from './PosterArt';
 import ScratchCard from './ScratchCard';
-
-const partners = 'Limpesa Solutions, Servyclean, El Urbano News, Demente, The Printt, Bilans ERP, Urban City Media, BOX Marketing y CIM CO.';
 
 export default function Invitation() {
   return (
     <main className="invitation">
       <article className="poster" aria-labelledby="invitation-title">
-        <h1 className="visually-hidden" id="invitation-title">{eventConfig.subtitle} · {eventConfig.brand}</h1>
-        <CasinoBackground />
-        <CasinoDecorations />
-        <PosterArt className="poster__crown" path="branding/gold-crown.png" bounds={artwork.crown} />
-        <PosterArt className="poster__logo" path="branding/grupo-emmi-logo.webp" bounds={artwork.logo} fallback={eventConfig.brand} />
-        <PosterArt className="poster__gala" path="typography/gala-title.png" bounds={artwork.gala} fallback="Gala" webp />
-        <PosterArt className="poster__marquee" path="typography/casino-marquee.png" bounds={artwork.casino} fallback="CASINO" webp priority />
-        <PosterArt className="poster__ribbon" path="typography/gala-ribbon.png" bounds={artwork.ribbon} alt="Noche de gala" fallback="NOCHE DE GALA" webp />
-        <PosterArt className="poster__suits" path="typography/casino-suits.svg" bounds={artwork.suits} />
-        <PosterArt className="poster__heading" path="typography/scratch-heading.png" bounds={artwork.heading} alt="Raspa y descubre tu invitación" fallback="RASPA Y DESCUBRE TU INVITACIÓN" webp />
-        <MarqueeLights />
+        <h1 className="visually-hidden" id="invitation-title">{eventConfig.title} · {eventConfig.brand}</h1>
+        <PosterArt path="redesign/background.webp" bounds={artwork.background} priority />
+        <PosterArt className="poster__ambient" path="redesign/sparkles.webp" bounds={artwork.ambient} />
+        <PosterArt className="poster__crown-light" path="redesign/crown-light.webp" bounds={artwork.crownLight} />
+        <PosterArt path="redesign/crown.webp" bounds={artwork.crown} />
+        <PosterArt path="redesign/brand.webp" bounds={artwork.logo} fallback={eventConfig.brand} />
+        <PosterArt path="redesign/scratch-heading.webp" bounds={artwork.heading} alt="Raspa y descubre tu invitación" fallback="Raspa y descubre tu invitación" />
+        <div className="poster__props" aria-hidden="true">
+          {casinoProps.map(({ name, bounds, edge }) => (
+            <PosterArt key={name} className={`poster__prop${edge ? ' poster__prop--edge' : ''}`} path={`redesign/${name}.webp`} bounds={bounds} />
+          ))}
+        </div>
+        <PosterArt className="poster__roulette" path="redesign/roulette.webp" bounds={artwork.roulette} />
+        <PosterArt className="poster__scratch-glow" path="redesign/scratch-glow.webp" bounds={artwork.scratchGlow} />
         <div className="poster__scratch" style={place(artwork.scratch)}>
           <ScratchCard />
         </div>
-        <footer className="poster__footer" style={place(artwork.partners)}>
-          <PosterArt className="poster-art--full" path="branding/partner-logos.svg" alt={partners} lazy />
-        </footer>
+        <PosterArt className="poster__ring" path="redesign/scratch-rim.webp" bounds={artwork.ring} />
+        <PosterArt className="poster__ring-glow" path="redesign/scratch-rim-glints.webp" bounds={artwork.ring} />
+        <PosterArt path="redesign/title-shadow.webp" bounds={artwork.titleShadow} />
+        <PosterArt path="redesign/LOGO_TWN_WEB.webp" reducedMotionPath="redesign/title-still.webp" bounds={artwork.title} fallback={eventConfig.title} priority />
+        <PosterArt className="poster__night-glow" path="redesign/night-flare.webp" bounds={artwork.nightGlow} />
+        <PosterArt path="redesign/ribbon.webp" bounds={artwork.ribbon} alt="Noche de gala" fallback="Noche de gala" />
       </article>
     </main>
   );

@@ -1,24 +1,35 @@
 import type { CSSProperties } from 'react';
 
-export const design = { width: 1086, height: 1448 };
+export const design = { width: 1080, height: 1920 };
 
 export type Bounds = readonly [x: number, y: number, width: number, height: number];
 
 export const artwork = {
-  crown: [499, 13, 85, 54],
-  logo: [377, 68, 326, 133],
-  gala: [417, 200, 285, 144],
-  casino: [208, 272, 662, 207],
-  ribbon: [176, 437, 720, 135],
-  suits: [307, 538, 470, 53],
-  heading: [214, 592, 655, 162],
-  cards: [21, 662, 377, 326],
-  chips: [20, 908, 294, 301],
-  dice: [46, 1082, 305, 244],
-  roulette: [758, 515, 328, 596],
-  scratch: [297.6, 783.4, 578, 450],
-  partners: [138, 1298, 842, 49.85],
+  background: [0, 0, 1080, 1920],
+  ambient: [0, 704, 1080, 1216],
+  crownLight: [277, 0, 526, 359],
+  crown: [449, 52, 181, 101],
+  logo: [416, 184, 248, 100],
+  heading: [225, 825, 628, 203],
+  roulette: [748, 827, 719, 719],
+  scratchGlow: [0, 908, 1080, 1012],
+  scratch: [185, 1114, 717, 717],
+  ring: [72, 1001, 944, 944],
+  titleShadow: [166, 196, 749, 750],
+  title: [126, 294, 830, 446],
+  nightGlow: [459, 435, 383, 383],
+  ribbon: [115, 728, 856, 143],
 } as const satisfies Record<string, Bounds>;
+
+// The Illustrator artboard already clips some silhouettes at the edges.
+export const casinoProps = [
+  { name: 'die-left', bounds: [0, 901, 104, 148], edge: true },
+  { name: 'chip-upper-left', bounds: [54, 1067, 156, 130], edge: false },
+  { name: 'card-and-chip-left', bounds: [0, 1351, 211, 341], edge: true },
+  { name: 'chip-right', bounds: [879, 1424, 179, 194], edge: false },
+  { name: 'cards-right', bounds: [741, 1626, 339, 294], edge: true },
+  { name: 'card-and-chip-bottom', bounds: [0, 1674, 308, 246], edge: true },
+] as const satisfies readonly { name: string; bounds: Bounds; edge: boolean }[];
 
 export function place([x, y, width, height]: Bounds): CSSProperties {
   return {

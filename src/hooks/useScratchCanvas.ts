@@ -4,8 +4,8 @@ import { asset } from '../utils/assets';
 import {
   erasedFraction,
   getBrushDiameter,
-  getLinearTransform,
   getValidSampleIndices,
+  isInsideScratchCircle,
   toCanvasPoint,
 } from '../utils/scratchMath';
 import type { Point, Size } from '../utils/scratchMath';
@@ -18,10 +18,10 @@ interface Stamp {
   start: boolean;
 }
 
-const SESSION_KEY = `gala-casino:revealed:${eventConfig.title}:${eventConfig.date}`;
+const SESSION_KEY = `gala-casino:circle:revealed:${eventConfig.title}:${eventConfig.date}`;
 const MEASUREMENT_INTERVAL = 110;
 const REVEAL_DURATION = 1320;
-const SAMPLE_SIZE = { width: 96, height: 73 };
+const SAMPLE_SIZE = { width: 96, height: 96 };
 const SAMPLE_INDICES = getValidSampleIndices(SAMPLE_SIZE);
 
 function wasRevealed(): boolean {
@@ -82,35 +82,21 @@ function paintFoil(
   mark: HTMLImageElement,
 ) {
   const sheen = context.createLinearGradient(0, 0, width, height);
-  sheen.addColorStop(0, '#a3a2a2');
-  sheen.addColorStop(0.36, '#eeeeec');
-  sheen.addColorStop(0.53, '#b4b3b2');
-  sheen.addColorStop(0.81, '#dedcda');
-  sheen.addColorStop(1, '#a29f9e');
+  sheen.addColorStop(0, '#a4a5a2');
+  sheen.addColorStop(0.4, '#c6c9c2');
+  sheen.addColorStop(0.73, '#b2b8b0');
+  sheen.addColorStop(1, '#9eaaa7');
   context.fillStyle = sheen;
   context.fillRect(0, 0, width, height);
 
   if (texture.complete && texture.naturalWidth) {
     context.drawImage(texture, 0, 0, width, height);
+  } else if (mark.complete && mark.naturalWidth) {
+    const markSize = height * 0.46;
+    context.globalAlpha = 0.46;
+    context.drawImage(mark, (width - markSize) / 2, (height - markSize) / 2, markSize, markSize);
+    context.globalAlpha = 1;
   }
-
-  if (mark.complete && mark.naturalWidth) {
-    const markSize = height * 0.27;
-    context.drawImage(mark, (width - markSize) / 2, height * 0.15, markSize, markSize);
-  }
-
-  const words = eventConfig.scratchInstruction.trim().split(/\s+/);
-  const split = Math.ceil(words.length / 2);
-  const lines = [words.slice(0, split).join(' '), words.slice(split).join(' ')].filter(Boolean);
-
-  context.fillStyle = '#211b19';
-  context.font = `900 ${height * 0.161}px Arial, sans-serif`;
-  context.textAlign = 'center';
-  context.textBaseline = 'middle';
-  lines.forEach((line, index) => {
-    const y = lines.length === 1 ? 0.65 : 0.57 + index * 0.166;
-    context.fillText(line, width / 2, height * y, width * 0.82);
-  });
 }
 
 export function useScratchCanvas() {
@@ -139,7 +125,7 @@ export function useScratchCanvas() {
     if (!element || stage !== 'covered') return;
 
     const displayContext = element.getContext('2d');
-    const mask = makeBitmap({ width: 786, height: 594 });
+    const mask = makeBitmap({ width: 768, height: 768 });
     const persistentContext = mask.getContext('2d');
     const sample = makeBitmap(SAMPLE_SIZE);
     const readContext = sample.getContext('2d', { willReadFrequently: true });
@@ -159,7 +145,6 @@ export function useScratchCanvas() {
     const mark = new Image();
     const brush = makeBrush();
     let size = { width: 0, height: 0 };
-    let transform = getLinearTransform(canvas);
     let activePointer: number | null = null;
     let frame: number | null = null;
     let lastMeasurement = -MEASUREMENT_INTERVAL;
@@ -187,7 +172,6 @@ export function useScratchCanvas() {
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 3);
       const bitmapWidth = Math.max(1, Math.round(nextSize.width * pixelRatio));
       const bitmapHeight = Math.max(1, Math.round(nextSize.height * pixelRatio));
-      transform = getLinearTransform(canvas);
 
       if (
         size.width === nextSize.width && size.height === nextSize.height
@@ -263,7 +247,7 @@ export function useScratchCanvas() {
       const rect = canvas.getBoundingClientRect();
       events.forEach((event, index) => {
         pending.push({
-          point: toCanvasPoint(event.clientX, event.clientY, rect, size, transform),
+          point: toCanvasPoint(event.clientX, event.clientY, rect),
           diameter: getBrushDiameter(size.width, event.pointerType),
           start: start && index === 0,
         });
@@ -272,7 +256,9 @@ export function useScratchCanvas() {
     }
 
     function onDown(event: PointerEvent) {
-      if (locked.current || activePointer !== null || event.button !== 0) return;
+      if (locked.current || activePointer !== null || event.button !== 0 || !size.width) return;
+      const point = toCanvasPoint(event.clientX, event.clientY, canvas.getBoundingClientRect());
+      if (!isInsideScratchCircle(point.x, point.y)) return;
       activePointer = event.pointerId;
       try {
         canvas.setPointerCapture(event.pointerId);
@@ -301,11 +287,7 @@ export function useScratchCanvas() {
     observer.observe(canvas);
     window.addEventListener('resize', resize);
     texture.onload = repaint;
-    texture.onerror = () => {
-      texture.onerror = null;
-      texture.src = asset('scratch/scratch-silver-texture.png');
-    };
-    texture.src = asset('scratch/scratch-silver-texture.webp');
+    texture.src = asset('redesign/scratch-foil.webp');
     mark.onload = repaint;
     mark.src = asset('scratch/scratch-mark.svg');
     canvas.addEventListener('pointerdown', onDown);
@@ -318,7 +300,6 @@ export function useScratchCanvas() {
       observer.disconnect();
       window.removeEventListener('resize', resize);
       texture.onload = null;
-      texture.onerror = null;
       mark.onload = null;
       if (frame !== null) window.cancelAnimationFrame(frame);
       canvas.removeEventListener('pointerdown', onDown);
