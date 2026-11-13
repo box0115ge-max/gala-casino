@@ -5,6 +5,5 @@ export const eventConfig = {
   time: '4:00 p. m.',
   venue: 'Volcatenango',
   revealMessage: '¡Tu noche ganadora te espera!',
-  revealThreshold: 0.6,
   persistReveal: true,
 };

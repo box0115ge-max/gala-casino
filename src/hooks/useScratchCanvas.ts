@@ -2,9 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { eventConfig } from '../config/event';
 import { asset } from '../utils/assets';
 import {
-  erasedFraction,
   getBrushDiameter,
-  getValidSampleIndices,
   isInsideScratchCircle,
   toCanvasPoint,
 } from '../utils/scratchMath';
@@ -18,11 +16,8 @@ interface Stamp {
   start: boolean;
 }
 
-const SESSION_KEY = `gala-casino:circle:revealed:${eventConfig.title}:${eventConfig.date}`;
-const MEASUREMENT_INTERVAL = 110;
+const SESSION_KEY = `gala-casino:circle:manual:revealed:${eventConfig.title}:${eventConfig.date}`;
 const REVEAL_DURATION = 1320;
-const SAMPLE_SIZE = { width: 96, height: 96 };
-const SAMPLE_INDICES = getValidSampleIndices(SAMPLE_SIZE);
 
 function wasRevealed(): boolean {
   if (!eventConfig.persistReveal) return false;
@@ -127,9 +122,7 @@ export function useScratchCanvas() {
     const displayContext = element.getContext('2d');
     const mask = makeBitmap({ width: 768, height: 768 });
     const persistentContext = mask.getContext('2d');
-    const sample = makeBitmap(SAMPLE_SIZE);
-    const readContext = sample.getContext('2d', { willReadFrequently: true });
-    if (!displayContext || !persistentContext || !readContext) {
+    if (!displayContext || !persistentContext) {
       setCanvasAvailable(false);
       return;
     }
@@ -137,7 +130,6 @@ export function useScratchCanvas() {
     const canvas = element;
     const context = displayContext;
     const maskContext = persistentContext;
-    const sampleContext = readContext;
     maskContext.fillRect(0, 0, mask.width, mask.height);
     maskContext.globalCompositeOperation = 'destination-out';
 
@@ -147,8 +139,6 @@ export function useScratchCanvas() {
     let size = { width: 0, height: 0 };
     let activePointer: number | null = null;
     let frame: number | null = null;
-    let lastMeasurement = -MEASUREMENT_INTERVAL;
-    let measureAtEnd = false;
     let pending: Stamp[] = [];
     let previous: Point | null = null;
 
@@ -202,14 +192,7 @@ export function useScratchCanvas() {
       );
     }
 
-    function measure() {
-      sampleContext.clearRect(0, 0, sample.width, sample.height);
-      sampleContext.drawImage(mask, 0, 0, sample.width, sample.height);
-      const pixels = sampleContext.getImageData(0, 0, sample.width, sample.height).data;
-      return erasedFraction(pixels, SAMPLE_INDICES);
-    }
-
-    function flush(now: number) {
+    function flush() {
       frame = null;
       if (locked.current || !size.width) return;
 
@@ -231,11 +214,6 @@ export function useScratchCanvas() {
       }
 
       pending = [];
-      if (measureAtEnd || now - lastMeasurement >= MEASUREMENT_INTERVAL) {
-        lastMeasurement = now;
-        measureAtEnd = false;
-        if (measure() >= eventConfig.revealThreshold) reveal();
-      }
     }
 
     function schedule() {
@@ -278,8 +256,6 @@ export function useScratchCanvas() {
       if (event.pointerId !== activePointer) return;
       if (event.type === 'pointerup') queue([event]);
       activePointer = null;
-      measureAtEnd = true;
-      schedule();
     }
 
     resize();
@@ -311,7 +287,7 @@ export function useScratchCanvas() {
         canvas.releasePointerCapture(activePointer);
       }
     };
-  }, [reveal, stage]);
+  }, [stage]);
 
   return { canvasRef, canvasAvailable, ready, reveal, stage };
 }

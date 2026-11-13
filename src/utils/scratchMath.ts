@@ -21,27 +21,3 @@ export function getBrushDiameter(width: number, pointerType: string): number {
     ? Math.min(54, Math.max(40, width * 0.21))
     : Math.min(45, Math.max(35, width * 0.15));
 }
-
-export function getValidSampleIndices({ width, height }: Size): number[] {
-  const validIndices: number[] = [];
-
-  for (let row = 0; row < height; row += 1) {
-    for (let col = 0; col < width; col += 1) {
-      const x = (col + 0.5) / width;
-      const y = (row + 0.5) / height;
-      if (isInsideScratchCircle(x, y)) {
-        validIndices.push((row * width + col) * 4 + 3);
-      }
-    }
-  }
-
-  return validIndices;
-}
-
-export function erasedFraction(pixels: Uint8ClampedArray, indices: number[]): number {
-  let erased = 0;
-  for (const index of indices) {
-    erased += 255 - pixels[index];
-  }
-  return erased / (indices.length * 255);
-}
