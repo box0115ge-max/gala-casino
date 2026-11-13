@@ -45,6 +45,8 @@
 
 .poster__scratch { position: absolute; }
 
+.poster__foreground { z-index: 1; }
+
 .poster__ambient,
 .poster__crown-light,
 .poster__scratch-glow,

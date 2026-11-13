@@ -11,7 +11,7 @@ export default function Invitation() {
         <PosterArt path="redesign/background.webp" bounds={artwork.background} priority />
         <PosterArt className="poster__ambient" path="redesign/sparkles.webp" bounds={artwork.ambient} />
         <PosterArt className="poster__crown-light" path="redesign/crown-light.webp" bounds={artwork.crownLight} />
-        <PosterArt path="redesign/crown.webp" bounds={artwork.crown} />
+        <PosterArt className="poster__foreground" path="redesign/crown.webp" bounds={artwork.crown} />
         <PosterArt path="redesign/brand.webp" bounds={artwork.logo} fallback={eventConfig.brand} />
         <PosterArt path="redesign/scratch-heading.webp" bounds={artwork.heading} alt="Raspa y descubre tu invitación" fallback="Raspa y descubre tu invitación" />
         <div className="poster__props" aria-hidden="true">
@@ -27,8 +27,8 @@ export default function Invitation() {
         <PosterArt className="poster__ring" path="redesign/scratch-rim.webp" bounds={artwork.ring} />
         <PosterArt className="poster__ring-glow" path="redesign/scratch-rim-glints.webp" bounds={artwork.ring} />
         <PosterArt path="redesign/title-shadow.webp" bounds={artwork.titleShadow} />
-        <PosterArt path="redesign/LOGO_TWN_WEB.webp" reducedMotionPath="redesign/title-still.webp" bounds={artwork.title} fallback={eventConfig.title} priority />
-        <PosterArt className="poster__night-glow" path="redesign/night-flare.webp" bounds={artwork.nightGlow} />
+        <PosterArt className="poster__foreground" path="redesign/LOGO_TWN_WEB.webp" reducedMotionPath="redesign/title-still.webp" bounds={artwork.title} fallback={eventConfig.title} priority />
+        <PosterArt className="poster__foreground poster__night-glow" path="redesign/night-flare.webp" bounds={artwork.nightGlow} />
         <PosterArt path="redesign/ribbon.webp" bounds={artwork.ribbon} alt="Noche de gala" fallback="Noche de gala" />
       </article>
     </main>
