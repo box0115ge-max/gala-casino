@@ -31,6 +31,11 @@ export default function Invitation() {
         <PosterArt className="poster__foreground" path="redesign/LOGO_TWN_WEB.webp" fallbackPath="redesign/title-still.webp" bounds={artwork.title} fallback={eventConfig.title} priority />
         <PosterArt className="poster__foreground poster__night-glow" path="redesign/night-flare.webp" bounds={artwork.nightGlow} />
         <PosterArt path="redesign/ribbon.webp" bounds={artwork.ribbon} alt="Noche de gala" fallback="Noche de gala" />
+        <p className="poster__dress-code">
+          <span>{eventConfig.dressCode.label}</span>
+          <strong>{eventConfig.dressCode.style}</strong>
+          <span>{eventConfig.dressCode.colors}</span>
+        </p>
         <InvitationMusic />
       </article>
     </main>

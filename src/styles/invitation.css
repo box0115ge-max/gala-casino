@@ -47,6 +47,22 @@
 
 .poster__foreground { z-index: 1; }
 
+.poster__dress-code {
+  position: absolute;
+  top: 52.25%;
+  left: 21%;
+  width: 58%;
+  display: grid;
+  gap: 0;
+  margin: 0;
+  color: #fff8ed;
+  font: 400 clamp(.625rem, 3.1cqw, 1rem) / 1.12 'Inter', system-ui, sans-serif;
+  text-align: center;
+  text-shadow: 0 1px 3px #420909, 0 0 6px #590e0e;
+}
+
+.poster__dress-code strong { font-weight: 800; }
+
 .invitation-music {
   position: absolute;
   inset-block-start: .625rem;
